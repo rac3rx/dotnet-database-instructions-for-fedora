@@ -1,0 +1,29 @@
+#
+# Add Microsoft's Dotnet Repo for Fedora 31
+#
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+
+sudo wget -O /etc/yum.repos.d/microsoft-prod.repo https://packages.microsoft.com/config/fedora/31/prod.repo
+
+
+#
+# install dotnet aspnetcore-runtime-3 (dnf is still linked to yum)
+#
+sudo yum -y install dotnet-sdk-3.1
+sudo yum -y install aspnetcore-runtime-3.1
+sudo yum -y install dotnet-runtime-3.1
+
+dotnet tool install --global dotnet-ef
+dotnet add package Microsoft.EntityFrameworkCore.Design
+
+#
+# didn't work under linux
+#
+#dotnet ef migrations add InitialCreate
+#dotnet ef database update
+
+#
+# tools directory for linux
+#
+~/.dotnet/tools/dotnet-ef migrations add InitialCreate
+~/.dotnet/tools/dotnet-ef database update
